@@ -1,0 +1,152 @@
+{
+    "http:\/\/surbl-org-permanent-test-point.com\/justatest": {
+        "multi.surbl.org": [
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "A",
+                "ip": "127.0.0.126"
+            },
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "TXT",
+                "txt": "wild.surbl.org permanent test point",
+                "entries": [
+                    "wild.surbl.org permanent test point"
+                ]
+            }
+        ]
+    },
+    "http:\/\/wasdavor.surbl-org-permanent-test-point.com\/justatest": {
+        "multi.surbl.org": [
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "A",
+                "ip": "127.0.0.126"
+            },
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "TXT",
+                "txt": "wild.surbl.org permanent test point",
+                "entries": [
+                    "wild.surbl.org permanent test point"
+                ]
+            }
+        ]
+    },
+    "http:\/\/127.0.0.2\/": {
+        "multi.surbl.org": [
+            {
+                "host": "2.0.0.127.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "A",
+                "ip": "127.0.0.126"
+            },
+            {
+                "host": "2.0.0.127.multi.surbl.org",
+                "class": "IN",
+                "ttl": 179,
+                "type": "TXT",
+                "txt": "wild.surbl.org permanent test point",
+                "entries": [
+                    "wild.surbl.org permanent test point"
+                ]
+            }
+        ]
+    },
+    "http:\/\/127.0.0.2\/justatest": {
+        "multi.surbl.org": [
+            {
+                "host": "2.0.0.127.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "A",
+                "ip": "127.0.0.126"
+            },
+            {
+                "host": "2.0.0.127.multi.surbl.org",
+                "class": "IN",
+                "ttl": 61,
+                "type": "TXT",
+                "txt": "multi.surbl.org permanent test point",
+                "entries": [
+                    "multi.surbl.org permanent test point"
+                ]
+            }
+        ]
+    },
+    "http:\/\/www.nohn.net": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/www.php.net\/": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/www.heise.de\/24234234?url=lala": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/www.nohn.net\/blog\/": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/213.147.6.150\/atest": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/www.google.co.uk\/search?hl=en&q=test&btnG=Google+Search&meta=": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/surbl-org-permanent-test-point.com": {
+        "multi.surbl.org": [
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 60,
+                "type": "A",
+                "ip": "127.0.0.126"
+            },
+            {
+                "host": "surbl-org-permanent-test-point.com.multi.surbl.org",
+                "class": "IN",
+                "ttl": 63,
+                "type": "TXT",
+                "txt": "multi.surbl.org permanent test point",
+                "entries": [
+                    "multi.surbl.org permanent test point"
+                ]
+            }
+        ]
+    },
+    "http:\/\/www.php.net": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "http:\/\/www.google.com": {
+        "multi.surbl.org": [
+
+        ]
+    },
+    "hurgahurga": {
+        "multi.surbl.org": [
+
+        ]
+    }
+}

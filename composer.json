@@ -1,0 +1,24 @@
+{
+  "authors" : [
+    {
+      "email" : "jbboehr@gmail.com",
+      "name" : "John Boehr"
+    }
+  ],
+  "autoload" : {
+    "psr-4" : {
+      "dnsbl\\": "src/"
+    }
+  },
+  "description" : "DNSBL lookup",
+  "homepage": "http://github.com/jbboehr/dnsbl",
+  "name" : "jbboehr/dnsbl",
+  "keywords" : [
+    "dnsbl"
+  ],
+  "license": "PHP",
+  "require" : {
+    "php" : ">=5.3.0"
+  },
+  "type" : "library"
+}

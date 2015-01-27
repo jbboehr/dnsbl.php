@@ -1,0 +1,111 @@
+{
+    "127.0.0.2": {
+        "sbl-xbl.spamhaus.org": [
+
+        ],
+        "bl.spamcop.net": [
+            {
+                "host": "2.0.0.127.bl.spamcop.net",
+                "class": "IN",
+                "ttl": 1473,
+                "type": "A",
+                "ip": "127.0.0.2"
+            },
+            {
+                "host": "2.0.0.127.bl.spamcop.net",
+                "class": "IN",
+                "ttl": 12156,
+                "type": "TXT",
+                "txt": "Blocked - see http:\/\/www.spamcop.net\/bl.shtml?127.0.0.2",
+                "entries": [
+                    "Blocked - see http:\/\/www.spamcop.net\/bl.shtml?127.0.0.2"
+                ]
+            }
+        ],
+        "b.barracudacentral.org": [
+            {
+                "host": "2.0.0.127.b.barracudacentral.org",
+                "class": "IN",
+                "ttl": 295,
+                "type": "A",
+                "ip": "127.0.0.2"
+            }
+        ],
+        "xbl.spamhaus.org": [
+
+        ],
+        "sbl.spamhaus.org": [
+            {
+                "host": "2.0.0.127.sbl.spamhaus.org",
+                "class": "IN",
+                "ttl": 56,
+                "type": "A",
+                "ip": "127.0.0.2"
+            }
+        ]
+    },
+    "mail.nohn.net": {
+        "sbl.spamhaus.org": [
+
+        ],
+        "dnsbl.sorbs.net": [
+
+        ]
+    },
+    "212.112.226.205": {
+        "sbl.spamhaus.org": [
+
+        ],
+        "sbl-xbl.spamhaus.org": [
+
+        ],
+        "bl.spamcop.net": [
+
+        ]
+    },
+    "smtp1.google.com": {
+        "sbl.spamhaus.org": [
+
+        ],
+        "xbl.spamhaus.org": [
+
+        ],
+        "bl.spamcop.net": [
+
+        ]
+    },
+    "88.77.163.166": {
+        "dnsbl.sorbs.net": [
+            {
+                "host": "166.163.77.88.dnsbl.sorbs.net",
+                "class": "IN",
+                "ttl": 2975,
+                "type": "A",
+                "ip": "127.0.0.10"
+            },
+            {
+                "host": "166.163.77.88.dnsbl.sorbs.net",
+                "class": "IN",
+                "ttl": 2975,
+                "type": "TXT",
+                "txt": "Dynamic IP Addresses See: http:\/\/www.sorbs.net\/lookup.shtml?88.77.163.166",
+                "entries": [
+                    "Dynamic IP Addresses See: http:\/\/www.sorbs.net\/lookup.shtml?88.77.163.166"
+                ]
+            }
+        ]
+    },
+    "127.0.0.1": {
+        "bl.spamcop.net": [
+
+        ],
+        "b.barracudacentral.org": [
+
+        ]
+    },
+    "www.google.de": {
+        "dnsbl.sorbs.net": [
+
+        ]
+    }
+}
