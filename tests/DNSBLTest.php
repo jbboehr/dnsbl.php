@@ -96,9 +96,9 @@ class NetDNSBLTest extends PHPUnit_Framework_TestCase
                     "ttl" => 2975,
                     "type" => "TXT",
                     "txt" => "Dynamic IP Addresses See: http://www.sorbs.net/lookup.shtml?88.77.163.166",
-                    "entries" => [
+                    "entries" => array(
                         "Dynamic IP Addresses See: http://www.sorbs.net/lookup.shtml?88.77.163.166"
-                    ]
+                    )
                 )
             )
         ), $r);
