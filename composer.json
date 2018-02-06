@@ -16,7 +16,7 @@
   "keywords" : [
     "dnsbl"
   ],
-  "license": "PHP",
+  "license": "PHP-3.01",
   "require" : {
     "php" : ">=5.3.0"
   },
