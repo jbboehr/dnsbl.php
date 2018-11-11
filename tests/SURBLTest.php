@@ -1,6 +1,6 @@
 <?php
 
-class SURBLTest extends PHPUnit_Framework_TestCase
+class SURBLTest extends \PHPUnit\Framework\TestCase
 {
     private $_surbl;
 

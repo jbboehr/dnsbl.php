@@ -1,6 +1,6 @@
 <?php
 
-class NetDNSBLTest extends PHPUnit_Framework_TestCase
+class NetDNSBLTest extends \PHPUnit\Framework\TestCase
 {
     private $_rbl;
     
