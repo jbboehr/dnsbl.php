@@ -1,7 +1,6 @@
 # dnsbl.php
 
 [![Build Status](https://travis-ci.org/jbboehr/dnsbl.php.png?branch=master)](https://travis-ci.org/jbboehr/dnsbl.php)
-[![HHVM Status](http://hhvm.h4cc.de/badge/jbboehr/dnsbl.png)](http://hhvm.h4cc.de/package/jbboehr/dnsbl)
 
 Simplified version of PEAR's Net_DNSBL with PEAR dependencies removed.
 
