@@ -9,7 +9,7 @@ class SURBLTest extends \PHPUnit\Framework\TestCase
      *
      * @return boolean true on success, false on failure
      */
-    protected function setUp()
+    protected function setUp(): void 
     {
         $dpf = __DIR__ . '/surbl.cache.json';
         $this->_surbl = new \DNSBL\SURBL(array(

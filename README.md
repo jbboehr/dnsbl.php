@@ -1,6 +1,6 @@
 # dnsbl.php
 
-[![Build Status](https://travis-ci.org/jbboehr/dnsbl.php.png?branch=master)](https://travis-ci.org/jbboehr/dnsbl.php)
+[![GitHub Build Status](https://github.com/jbboehr/dnsbl.php/workflows/ci/badge.svg)](https://github.com/jbboehr/dnsbl.php/actions?query=workflow%3Aci)
 
 Simplified version of PEAR's Net_DNSBL with PEAR dependencies removed.
 

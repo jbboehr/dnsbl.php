@@ -9,7 +9,7 @@ class NetDNSBLTest extends \PHPUnit\Framework\TestCase
      *
      * @return boolean true on success, false on failure
      */
-    protected function setUp()
+    protected function setUp(): void 
     {
         $dpf = __DIR__ . '/dnsbl.cache.json';
         $this->_rbl = new \DNSBL\DNSBL(array(

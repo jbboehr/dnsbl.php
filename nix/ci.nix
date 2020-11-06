@@ -30,11 +30,6 @@ builtins.mapAttrs (k: _v:
     };
   in
   pkgs.recurseIntoAttrs {
-    php72 = generateTestsForPlatform {
-        inherit pkgs path src;
-        phpAttr = "php72";
-    };
-
     php73 = let
         php = pkgs.php73;
     in generateTestsForPlatform {
