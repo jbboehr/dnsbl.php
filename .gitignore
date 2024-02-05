@@ -1,2 +1,11 @@
-nbproject
-vendor
+.direnv
+.envrc
+.idea
+.phpunit.result.cache
+.phpunit.cache
+*.log
+clover.xml
+result*
+/.pre-commit-config.yaml
+/coverage/
+/vendor/

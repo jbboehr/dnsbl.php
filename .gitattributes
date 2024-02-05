@@ -1,2 +1,15 @@
-nix/composer-env.nix    linguist-vendored=true linguist-generated=true
-nix/php-packages.nix    linguist-vendored=true linguist-generated=true
+* text=auto
+
+composer.lock linguist-generated
+composer-project.nix linguist-generated
+
+.editorconfig export-ignore
+.envrc export-ignore
+.gitattributes export-ignore
+
+/tests export-ignore
+.github export-ignore
+.phpcs.xml.dist export-ignore
+psalm.xml export-ignore
+phpstan.neon.dist export-ignore
+phpunit.xml.dist export-ignore

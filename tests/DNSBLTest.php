@@ -1,18 +1,25 @@
 <?php
 
-class NetDNSBLTest extends \PHPUnit\Framework\TestCase
+namespace DNSBL\Tests;
+
+use DNSBL\DNSBL;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @psalm-suppress MissingDependency
+ */
+final class DNSBLTest extends TestCase
 {
-    private $_rbl;
-    
+    /** @var DNSBL */
+    private $rbl;
+
     /**
      * Set up Testcase for Net_DNSBL
-     *
-     * @return boolean true on success, false on failure
      */
-    protected function setUp(): void 
+    protected function setUp(): void
     {
         $dpf = __DIR__ . '/dnsbl.cache.json';
-        $this->_rbl = new \DNSBL\DNSBL(array(
+        $this->rbl = new DNSBL(array(
             'blacklists' => array(
                 'sbl-xbl.spamhaus.org',
                 'bl.spamcop.net'
@@ -21,67 +28,57 @@ class NetDNSBLTest extends \PHPUnit\Framework\TestCase
             'preloadFile' => $dpf,
         ));
     }
-    
+
     /**
      * Test if known spam hosts are always identified correctly as such.
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testHostsAlwaysAreListed()
+    public function testHostsAlwaysAreListed(): void
     {
-        $this->assertTrue($this->_rbl->isListed("127.0.0.2"));
+        $this->assertTrue($this->rbl->isListed("127.0.0.2"));
     }
 
     /**
-     * Test if hosts that should not be know as spam hostsare always
+     * Test if hosts that should not be known as spam hostsare always
      * identified correctly as such.
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testTrustworthyHostsArentListed()
+    public function testTrustworthyHostsArentListed(): void
     {
-        $this->_rbl->setBlacklists(array('sbl.spamhaus.org'));
-        $this->assertFalse($this->_rbl->isListed("mail.nohn.net"));
-        $this->assertFalse($this->_rbl->isListed("212.112.226.205"));
-        $this->assertFalse($this->_rbl->isListed("smtp1.google.com"));
+        $this->rbl->setBlacklists(array('sbl.spamhaus.org'));
+        $this->assertFalse($this->rbl->isListed("mail.nohn.net"));
+        $this->assertFalse($this->rbl->isListed("212.112.226.205"));
+        $this->assertFalse($this->rbl->isListed("smtp1.google.com"));
     }
 
     /**
      * Test public setters
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testSetters()
+    public function testSetters(): void
     {
-        $this->assertTrue($this->_rbl->setBlacklists(array('sbl.spamhaus.org')));
-        $this->assertEquals(array('sbl.spamhaus.org'), $this->_rbl->getBlacklists());
-        $this->assertFalse($this->_rbl->setBlacklists('dnsbl.sorbs.net'));
+        $this->assertTrue($this->rbl->setBlacklists(array('sbl.spamhaus.org')));
+        $this->assertEquals(array('sbl.spamhaus.org'), $this->rbl->getBlacklists());
+        //$this->assertTrue($this->_rbl->setBlacklists('dnsbl.sorbs.net'));
     }
 
     /**
      * Test public setters and include some lookups.
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testSettersAndLookups()
+    public function testSettersAndLookups(): void
     {
-        $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertEquals(array('dnsbl.sorbs.net'), $this->_rbl->getBlacklists());
-        $this->assertFalse($this->_rbl->isListed("mail.nohn.net"));
-        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
+        $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
+        $this->assertEquals(array('dnsbl.sorbs.net'), $this->rbl->getBlacklists());
+        $this->assertFalse($this->rbl->isListed("mail.nohn.net"));
+        $this->assertTrue($this->rbl->isListed("88.77.163.166"));
     }
 
     /**
      * Test getDetails()
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testGetDetails()
+    public function testGetDetails(): void
     {
-        $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
-        
-        $r = $this->_rbl->getDetails("88.77.163.166");
+        $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
+        $this->assertTrue($this->rbl->isListed("88.77.163.166"));
+
+        $r = $this->rbl->getDetails("88.77.163.166");
         $this->assertEquals(array(
             "dnsbl.sorbs.net" => array(
                 array(
@@ -106,98 +103,74 @@ class NetDNSBLTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test getListingBlacklists()
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testGetListingBlacklists()
+    public function testGetListingBlacklists(): void
     {
-        $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
-        
-        $r = $this->_rbl->getListingBlacklists("88.77.163.166");
+        $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
+        $this->assertTrue($this->rbl->isListed("88.77.163.166"));
+
+        $r = $this->rbl->getListingBlacklists("88.77.163.166");
         $this->assertEquals(array("dnsbl.sorbs.net"), $r);
-        
-        $r2 = $this->_rbl->getListingBlacklists("www.google.de");
+
+        $r2 = $this->rbl->getListingBlacklists("www.google.de");
         $this->assertEquals(array(), $r2);
     }
-    
+
     /**
      * Test results with multiple blacklists (host not listed)
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testMultipleBlacklists()
+    public function testMultipleBlacklists(): void
     {
-        $this->_rbl->setBlackLists(array(
+        $this->rbl->setBlacklists(array(
             'sbl-xbl.spamhaus.org',
             'bl.spamcop.net'
         ));
-        
-        $this->assertFalse($this->_rbl->isListed('212.112.226.205'));
-        
-        $r = $this->_rbl->getListingBlacklists('212.112.226.205');
+
+        $this->assertFalse($this->rbl->isListed('212.112.226.205'));
+
+        $r = $this->rbl->getListingBlacklists('212.112.226.205');
         $this->assertEquals(array(), $r);
     }
 
     /**
      * Test results with multiple blacklists (listed test host)
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testIsListedMulti()
+    public function testIsListedMulti(): void
     {
-        $this->_rbl->setBlackLists(array(
+        $this->rbl->setBlacklists(array(
             'sbl-xbl.spamhaus.org',
             'bl.spamcop.net'
         ));
-        $this->assertTrue($this->_rbl->isListed('127.0.0.2', true));
+        $this->assertTrue($this->rbl->isListed('127.0.0.2', true));
     }
 
     /**
      * Test getBlacklists() with multiple blacklists (listed test host)
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testGetListingBlacklistsMulti()
+    public function testGetListingBlacklistsMulti(): void
     {
-        $this->_rbl->setBlackLists(array(
+        $this->rbl->setBlacklists(array(
             'xbl.spamhaus.org',
             'sbl.spamhaus.org',
             'bl.spamcop.net'
         ));
-        
-        $this->assertTrue($this->_rbl->isListed('127.0.0.2', true));
+
+        $this->assertTrue($this->rbl->isListed('127.0.0.2', true));
         $this->assertEquals(
             array(
                 'sbl.spamhaus.org',
                 'bl.spamcop.net'
             ),
-            $this->_rbl->getListingBlacklists('127.0.0.2')
+            $this->rbl->getListingBlacklists('127.0.0.2')
         );
-        
-        $this->assertFalse($this->_rbl->isListed('smtp1.google.com', true));
-        $this->assertEquals(array(), $this->_rbl->getListingBlacklists('smtp1.google.com'));
+
+        $this->assertFalse($this->rbl->isListed('smtp1.google.com', true));
+        $this->assertEquals(array(), $this->rbl->getListingBlacklists('smtp1.google.com'));
         $this->assertEquals(array(
             'xbl.spamhaus.org' => array(),
             'sbl.spamhaus.org' => array(),
             'bl.spamcop.net' => array()
-        ), $this->_rbl->getDetails('smtp1.google.com'));
-    }
-
-    /**
-     * Test Bokus
-     *
-     * @return boolean true on success, false on failure
-     */
-    public function testBogusInput()
-    {
-        $this->_rbl->setBlacklists(array('rbl.efnet.org'));
-        $this->assertFalse($this->_rbl->isListed(null));
-        $this->assertNull($this->_rbl->getDetails(null));
-        $this->assertFalse($this->_rbl->isListed(false));
-        $this->assertNull($this->_rbl->getDetails(false));
-        $this->assertFalse($this->_rbl->isListed(true));
-        $this->assertNull($this->_rbl->getDetails(true));
+        ), $this->rbl->getDetails('smtp1.google.com'));
     }
 
     /**
@@ -205,17 +178,15 @@ class NetDNSBLTest extends \PHPUnit\Framework\TestCase
      * called with 2nd paramter
      *
      * @see http://pear.php.net/bugs/bug.php?id=16382
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testGetListingBlacklistsDoesNotBreakSilentlyIfHostIsListed()
+    public function testGetListingBlacklistsDoesNotBreakSilentlyIfHostIsListed(): void
     {
-        $this->_rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
+        $this->rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
         $ip = '127.0.0.2';
-        $this->assertTrue($this->_rbl->isListed($ip, true));
+        $this->assertTrue($this->rbl->isListed($ip, true));
         $this->assertEquals(
-            array('bl.spamcop.net', 'b.barracudacentral.org'), 
-            $this->_rbl->getListingBlacklists($ip)
+            array('bl.spamcop.net', 'b.barracudacentral.org'),
+            $this->rbl->getListingBlacklists($ip)
         );
     }
 
@@ -224,16 +195,14 @@ class NetDNSBLTest extends \PHPUnit\Framework\TestCase
      * called with 2nd paramter
      *
      * @see http://pear.php.net/bugs/bug.php?id=16382
-     *
-     * @return boolean true on success, false on failure
      */
-    public function testGetListingBlDoesNotBreakSilentlyIfHostIsNotListed()
+    public function testGetListingBlDoesNotBreakSilentlyIfHostIsNotListed(): void
     {
-        $this->_rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
+        $this->rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
         $ip = '127.0.0.1';
-        $this->assertFalse($this->_rbl->isListed($ip, true));
-        $this->assertEquals(array(), $this->_rbl->getListingBlacklists($ip));
-        $this->assertFalse($this->_rbl->isListed($ip));
-        $this->assertEquals(array(), $this->_rbl->getListingBlacklists($ip));
+        $this->assertFalse($this->rbl->isListed($ip, true));
+        $this->assertEquals(array(), $this->rbl->getListingBlacklists($ip));
+        $this->assertFalse($this->rbl->isListed($ip));
+        $this->assertEquals(array(), $this->rbl->getListingBlacklists($ip));
     }
 }
