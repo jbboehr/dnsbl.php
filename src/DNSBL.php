@@ -213,17 +213,33 @@ class DNSBL
     }
 
     /**
-     * Reverse the order of an IP. 127.0.0.1 -> 1.0.0.127. Currently
-     * only works for v4-adresses
+     * Reverse the order of an IP address to PTR
+     * IPv4: 127.0.0.1 -> 1.0.0.127
+     * IPv6: 2001:db8::567:89ab -> b.a.9.8.7.6.5.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2 // Example taken from https://en.wikipedia.org/wiki/Reverse_DNS_lookup#IPv6_reverse_resolution
      *
-     * @param string $ip IP address to reverse.
+     * @param string $ipAddress IP address to reverse.
      *
      * @access protected
-     * @return string Reversed IP
+     * @return string Reversed IP address
+     * @throws \Exception
      */
-    protected function reverseIp(string $ip): string
+    public function reverseIp(string $ipAddress): string
     {
-        return implode('.', array_reverse(explode('.', $ip)));
+        $ipAddress = trim($ipAddress, '[]'); // IPv6 addresses are sometimes enclosed in square brackets. Removing them here for IPv4 too :-)
+
+        if(filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {    
+            return implode('.', array_reverse(explode('.', $ipAddress)));
+        }
+        elseif (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            // Code is taken from https://stackoverflow.com/a/6621473/1668200
+            $in_addr = inet_pton($ipAddress);
+            $unpack = unpack('H*hex', $in_addr);
+            $hex = $unpack['hex'];
+            return implode('.', array_reverse(str_split($hex)));
+        }
+        else {
+            throw new \Exception();
+        }
     }
 
     /**
