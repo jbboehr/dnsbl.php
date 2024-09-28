@@ -205,4 +205,19 @@ final class DNSBLTest extends TestCase
         $this->assertFalse($this->rbl->isListed($ip));
         $this->assertEquals(array(), $this->rbl->getListingBlacklists($ip));
     }
+
+    public function testReverseIp(): void
+    {
+        // IPv4:
+        $this->assertEquals('1.0.0.127', $this->rbl->reverseIp('127.0.0.1'));
+        $this->assertEquals('1.0.0.127', $this->rbl->reverseIp('[127.0.0.1]'));
+
+        // IPv6:
+        $this->assertEquals('b.a.9.8.7.6.5.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2', $this->rbl->reverseIp('2001:db8::567:89ab'));
+        $this->assertEquals('b.a.9.8.7.6.5.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2', $this->rbl->reverseIp('[2001:db8::567:89ab]'));
+
+        // Invalid IP address:
+        $this->expectException(\Exception::class);
+        $this->rbl->reverseIp('foobar');
+    }
 }
