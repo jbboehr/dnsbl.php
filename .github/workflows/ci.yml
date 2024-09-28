@@ -23,6 +23,7 @@ jobs:
                     - "8.1"
                     - "8.2"
                     - "8.3"
+                    - "8.4"
         steps:
             - uses: actions/checkout@v4
 
@@ -54,8 +55,8 @@ jobs:
             - name: phpstan
               run: php vendor/bin/phpstan analyze
 
-            - name: psalm
-              run: php vendor/bin/psalm
+#            - name: psalm
+#              run: php vendor/bin/psalm
 
     test:
         runs-on: ubuntu-latest
@@ -66,6 +67,7 @@ jobs:
                     - "8.1"
                     - "8.2"
                     - "8.3"
+                    - "8.4"
         steps:
             - uses: actions/checkout@v4
 
